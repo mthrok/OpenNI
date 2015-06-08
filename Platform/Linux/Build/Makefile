@@ -1,6 +1,6 @@
 #############################################################################
 # OpenNI makefile.
-# 
+#
 # default configuration is Release. for a debug version use:
 # 	make CFG=Debug
 #
@@ -29,10 +29,10 @@ ALL_UTILS = \
 ALL_MONO_PROJS = \
 	Wrappers/OpenNI.net
 
-ALL_JAVA_PROJS = \
-	Wrappers/OpenNI.jni \
-	Wrappers/OpenNI.java
-	
+#ALL_JAVA_PROJS = \
+#	Wrappers/OpenNI.jni \
+#	Wrappers/OpenNI.java
+
 # list all core projects
 ALL_CORE_PROJS = \
 	OpenNI \
@@ -41,32 +41,32 @@ ALL_CORE_PROJS = \
 	$(ALL_JAVA_PROJS)
 
 # list all samples
-CORE_SAMPLES = \
-	Samples/NiSimpleRead \
-	Samples/NiBackRecorder \
-	Samples/NiConvertXToONI \
-	Samples/NiRecordSynthetic \
-	Samples/NiSampleModule \
-	Samples/NiSimpleCreate \
-	Samples/NiCRead \
-	Samples/NiAudioSample \
-	Samples/NiSimpleSkeleton \
-	Samples/NiSkeletonBenchmark
-	
-ifeq "$(GLUT_SUPPORTED)" "1"
-	CORE_SAMPLES += \
-		Samples/NiViewer \
-		Samples/NiSimpleViewer \
-		Samples/NiUserTracker \
-		Samples/NiUserSelection \
-		Samples/NiHandTracker
-else
-	ifeq "$(GLES_SUPPORTED)" "1"
-		CORE_SAMPLES += \
-			Samples/NiUserTracker \
-			Samples/NiUserSelection
-	endif
-endif
+#CORE_SAMPLES = \
+#	Samples/NiSimpleRead \
+#	Samples/NiBackRecorder \
+#	Samples/NiConvertXToONI \
+#	Samples/NiRecordSynthetic \
+#	Samples/NiSampleModule \
+#	Samples/NiSimpleCreate \
+#	Samples/NiCRead \
+#	Samples/NiAudioSample \
+#	Samples/NiSimpleSkeleton \
+#	Samples/NiSkeletonBenchmark
+
+#ifeq "$(GLUT_SUPPORTED)" "1"
+#	CORE_SAMPLES += \
+#		Samples/NiViewer \
+#		Samples/NiSimpleViewer \
+#		Samples/NiUserTracker \
+#		Samples/NiUserSelection \
+#		Samples/NiHandTracker
+#else
+#	ifeq "$(GLES_SUPPORTED)" "1"
+#		CORE_SAMPLES += \
+#			Samples/NiUserTracker \
+#			Samples/NiUserSelection
+#	endif
+#endif
 
 MONO_SAMPLES = \
 	Samples/SimpleRead.net
@@ -74,20 +74,20 @@ MONO_SAMPLES = \
 MONO_FORMS_SAMPLES = \
 	Samples/SimpleViewer.net \
 	Samples/UserTracker.net
-	
-JAVA_SAMPLES = \
-	Samples/SimpleRead.java \
-	Samples/SimpleViewer.java \
-	Samples/UserTracker.java \
 
-ALL_SAMPLES = \
-	$(CORE_SAMPLES) \
-	$(JAVA_SAMPLES)
+#JAVA_SAMPLES = \
+#	Samples/SimpleRead.java \
+#	Samples/SimpleViewer.java \
+#	Samples/UserTracker.java \
+
+#ALL_SAMPLES = \
+#	$(CORE_SAMPLES) \
+#	$(JAVA_SAMPLES)
 
 # list all projects that are build
 ALL_BUILD_PROJS = \
-	$(ALL_CORE_PROJS) \
-	$(ALL_SAMPLES)
+	$(ALL_CORE_PROJS) #\
+#	$(ALL_SAMPLES)
 
 ALL_PROJS = \
 	$(ALL_BUILD_PROJS)
@@ -95,7 +95,7 @@ ALL_PROJS = \
 # decide if CLR projects should be build
 ifneq "$(realpath /usr/bin/gmcs)" ""
 	MONO_INSTALLED = 1
-	
+
 	ifneq "$(shell gacutil -l | grep System.Windows.Forms)" ""
 		MONO_WINFORMS_INSTALLED = 1
 	endif
@@ -105,7 +105,7 @@ ifeq "$(FORCE_BUILD_CLR)" "1"
 	ifndef MONO_INSTALLED
 		DUMMY:=$(error Mono is not installed! Consider turning off FORCE_BUILD_CLR.)
 	endif
-	
+
 	ifndef MONO_WINFORMS_INSTALLED
 		DUMMY:=$(error Mono WinForms is not installed! Consider turning off FORCE_BUILD_CLR.)
 	endif
@@ -114,7 +114,7 @@ endif
 ifdef MONO_INSTALLED
 	ALL_PROJS += $(ALL_MONO_PROJS)
 	ALL_PROJS += $(MONO_SAMPLES)
-	
+
 	ifdef MONO_WINFORMS_INSTALLED
 		ALL_PROJS += $(MONO_FORMS_SAMPLES)
 	endif
@@ -124,16 +124,16 @@ ALL_PROJS_CLEAN = $(foreach proj,$(ALL_PROJS),$(proj)-clean)
 
 # define a function which creates a target for each proj
 define CREATE_PROJ_TARGET
-$1: 
+$1:
 	$$(MAKE) -C $1
 
-$1-clean: 
+$1-clean:
 	$$(MAKE) -C $1 clean
 endef
 
 ################ TARGETS ##################
 
-.PHONY: all $(ALL_PROJS) $(ALL_PROJS_CLEAN) install uninstall clean 
+.PHONY: all $(ALL_PROJS) $(ALL_PROJS_CLEAN) install uninstall clean
 
 # make all makefiles
 all: $(ALL_PROJS)
@@ -157,33 +157,33 @@ Modules/nimRecorder:		OpenNI
 Utils/niReg:			OpenNI
 Utils/niLicense:		OpenNI
 
-Wrappers/OpenNI.net:		OpenNI
-Wrappers/OpenNI.jni:		OpenNI
-Wrappers/OpenNI.java:		Wrappers/OpenNI.jni
+#Wrappers/OpenNI.net:		OpenNI
+#Wrappers/OpenNI.jni:		OpenNI
+#Wrappers/OpenNI.java:		Wrappers/OpenNI.jni
 
-Samples/NiSimpleRead:		OpenNI
-Samples/NiBackRecorder:		OpenNI
-Samples/NiConvertXToONI:	OpenNI
-Samples/NiRecordSynthetic:	OpenNI
-Samples/NiSampleModule:		OpenNI
-Samples/NiSimpleCreate:		OpenNI
-Samples/NiCRead:		OpenNI
-Samples/NiAudioSample:		OpenNI
-Samples/NiSimpleSkeleton:	OpenNI
-Samples/NiSkeletonBenchmark: OpenNI
-Samples/NiUserTracker:		OpenNI
-Samples/NiUserSelection:	OpenNI
-Samples/NiHandTracker:		OpenNI
-Samples/NiViewer:		OpenNI
-Samples/NiSimpleViewer:		OpenNI
+#Samples/NiSimpleRead:		OpenNI
+#Samples/NiBackRecorder:		OpenNI
+#Samples/NiConvertXToONI:	OpenNI
+#Samples/NiRecordSynthetic:	OpenNI
+#Samples/NiSampleModule:		OpenNI
+#Samples/NiSimpleCreate:		OpenNI
+#Samples/NiCRead:		OpenNI
+#Samples/NiAudioSample:		OpenNI
+#Samples/NiSimpleSkeleton:	OpenNI
+#Samples/NiSkeletonBenchmark: OpenNI
+#Samples/NiUserTracker:		OpenNI
+#Samples/NiUserSelection:	OpenNI
+#Samples/NiHandTracker:		OpenNI
+#Samples/NiViewer:		OpenNI
+#Samples/NiSimpleViewer:		OpenNI
 
-Samples/SimpleRead.net:		Wrappers/OpenNI.net
-Samples/SimpleViewer.net:	Wrappers/OpenNI.net
-Samples/UserTracker.net:	Wrappers/OpenNI.net
+#Samples/SimpleRead.net:		Wrappers/OpenNI.net
+#Samples/SimpleViewer.net:	Wrappers/OpenNI.net
+#Samples/UserTracker.net:	Wrappers/OpenNI.net
 
-Samples/SimpleRead.java:	Wrappers/OpenNI.java
-Samples/SimpleViewer.java:	Wrappers/OpenNI.java
-Samples/UserTracker.java:	Wrappers/OpenNI.java
+#Samples/SimpleRead.java:	Wrappers/OpenNI.java
+#Samples/SimpleViewer.java:	Wrappers/OpenNI.java
+#Samples/UserTracker.java:	Wrappers/OpenNI.java
 
 
 # clean is cleaning all projects
