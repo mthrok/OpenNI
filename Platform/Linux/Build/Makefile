@@ -29,9 +29,9 @@ ALL_UTILS = \
 ALL_MONO_PROJS = \
 	Wrappers/OpenNI.net
 
-#ALL_JAVA_PROJS = \
-#	Wrappers/OpenNI.jni \
-#	Wrappers/OpenNI.java
+ALL_JAVA_PROJS = \
+	Wrappers/OpenNI.jni \
+	Wrappers/OpenNI.java
 
 # list all core projects
 ALL_CORE_PROJS = \
@@ -157,9 +157,9 @@ Modules/nimRecorder:		OpenNI
 Utils/niReg:			OpenNI
 Utils/niLicense:		OpenNI
 
-#Wrappers/OpenNI.net:		OpenNI
-#Wrappers/OpenNI.jni:		OpenNI
-#Wrappers/OpenNI.java:		Wrappers/OpenNI.jni
+Wrappers/OpenNI.net:		OpenNI
+Wrappers/OpenNI.jni:		OpenNI
+Wrappers/OpenNI.java:		Wrappers/OpenNI.jni
 
 #Samples/NiSimpleRead:		OpenNI
 #Samples/NiBackRecorder:		OpenNI
